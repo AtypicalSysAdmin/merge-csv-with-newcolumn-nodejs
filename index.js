@@ -15,6 +15,7 @@ var getFileName = require('path');
 
 
 
+//Getting the files paths in the directory to pass it to the next function to merge the files
 const directory = './Files/';
 const path = require('path');
 
@@ -41,6 +42,7 @@ fs.readdirSync(directory).forEach(file => {
 
 
 //------------------------------------------------------------------
+//merge call
 concatCSVAndOutput(filesnames, 'outputfile.csv')
     .then(() => {console.log('MERGE DONE!');});
 
@@ -55,8 +57,8 @@ function concatCSVAndOutput(csvFilePaths, outputFilePath) {
           .parseFile(path, {headers: true})
           .on('data', function(data) {
 
-
-            data.OPID=getFileName.basename(path,getFileName.extname(path)); 
+	   //getting the file's name without its extention to put it in the new Column next to its data	
+            data.newColumn=getFileName.basename(path,getFileName.extname(path)); 
 
 
             dataArray.push(data);
@@ -70,6 +72,8 @@ function concatCSVAndOutput(csvFilePaths, outputFilePath) {
   return Promise.all(promises)
       .then((results) => {
 
+	//writing process
+	  
         const csvStream = csv.format({headers: true});
         const writableStream = fs.createWriteStream(outputFilePath);
 
