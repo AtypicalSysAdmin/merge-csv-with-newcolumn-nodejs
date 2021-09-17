@@ -33,3 +33,13 @@ You can subtitute the newColumn with your prefrence.
 
 
 Check out the code for more info
+
+required modules:
+
+npm init\
+npm install fast-csv\
+npm i csv-parse\
+npm install -g async\
+npm install express
+
+
