@@ -49,12 +49,14 @@ concatCSVAndOutput(filesnames, 'outputfile.csv')
 
 //-------------------------------------------------------------------
 
+//reads the files and adds new column next to the data of the file that is being read
+
 function concatCSVAndOutput(csvFilePaths, outputFilePath) {
   const promises = csvFilePaths.map((path) => {
     return new Promise((resolve) => {
       const dataArray = [];
       return csv
-          .parseFile(path, {headers: true})
+          .parseFile(path, {headers: true}) //you can use {headers: true, skipLines: 3} or any number instead of 3 if you have longer header
           .on('data', function(data) {
 
 	   //getting the file's name without its extention to put it in the new Column next to its data	
